@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Animation API 기본</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+
+    <script>
+        const box = document.querySelector('.box');
+
+        const keyframes = [
+            { transform: 'translate(0, 0)', opacity: 0 },
+            { transform: 'translate(100px, 0)', opacity: 0.25, offset: 0.5 },
+            { transform: 'translate(100px, 100px)', opacity: 0.5 },
+            { transform: 'translate(0, 100px)', opacity: 0.75 },
+            { transform: 'translate(0, 0)', opacity: 1 },
+        ];
+
+        const options = {
+            duration: 1000,
+            // iterations: Infinity,
+            iterations: 2,
+            direction: 'alternate',
+        };
+
+        const animation = box.animate(keyframes, options);  // Animation 객체 반환
+
+        console.log(animation);
+
+        animation.ready.then(() => console.log('Animation Started'));  // Promise
+        animation.finished.then(() => console.log('Animation Finished'));
+    </script>
+</body>
+</html>
